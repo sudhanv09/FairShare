@@ -1,6 +1,6 @@
 ---
 import "~/style/global.css"
-import { Button } from "~/components/ui/button"
+import Intro from "~/components/pageComponents/Intro"
 ---
 
 <html lang="en">
@@ -10,7 +10,7 @@ import { Button } from "~/components/ui/button"
 		<meta name="generator" content={Astro.generator} />
 		<title>FairShare</title>
 	</head>
-	<body>
-		<h1>Astro</h1>
+	<body class="h-dvh flex items-center justify-center bg-black text-white">
+		<Intro client:load/>
 	</body>
 </html>
