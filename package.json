@@ -13,6 +13,7 @@
     "autoprefixer": "^10.4.19",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "lucide-solid": "^0.456.0",
     "nanoid": "^5.0.8",
     "postcss": "^8.4.38",
     "solid-js": "^1.9.2",
