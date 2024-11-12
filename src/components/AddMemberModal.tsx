@@ -17,6 +17,8 @@ import Plus from "lucide-solid/icons/plus";
 import Trash from "lucide-solid/icons/trash";
 import { createSignal, For, Show } from "solid-js";
 import { useParams } from "@solidjs/router";
+import { store, setStore } from "~/lib/persist";
+import type { Member } from "~/lib/types";
 
 export function AddMemberModal() {
   const [member, setMember] = createSignal([{ name: "", email: "" }]);
@@ -31,9 +33,39 @@ export function AddMemberModal() {
   };
 
   const removeField = (idx: number) => {
-    let val = [...member()]
-    val.splice(idx, 1)
-    setMember(val)
+    let val = [...member()];
+    val.splice(idx, 1);
+    setMember(val);
+  };
+
+  const handleInputChange = (
+    index: number,
+    field: "name" | "email",
+    value: string
+  ) => {
+    const updatedMembers = [...member()];
+    updatedMembers[index][field] = value;
+    setMember(updatedMembers);
+  };
+
+  const saveChanges = () => {
+    const newMembers: Member[] = member().map((m) => ({
+      name: m.name,
+      email: m.email,
+      entries: [],
+      balance: 0,
+    }));
+
+    const updated = [...store];
+    const roomIndex = updated.findIndex((room) => room.id === roomId);
+
+    updated[roomIndex] = {
+      ...updated[roomIndex],
+      members: [...updated[roomIndex].members, ...newMembers],
+    };
+
+    setStore(updated);
+    setMember([{ name: "", email: "" }]);
   };
 
   return (
@@ -56,6 +88,9 @@ export function AddMemberModal() {
                     value={item.name}
                     class="col-span-3"
                     type="text"
+                    onInput={(e) => 
+                      handleInputChange(index(), "name", e.currentTarget.value)
+                    }
                   />
                 </TextField>
                 <TextField class="grid grid-cols-4 items-center gap-4">
@@ -65,6 +100,9 @@ export function AddMemberModal() {
                     placeholder="Optional"
                     class="col-span-3"
                     type="email"
+                    onInput={(e) => 
+                      handleInputChange(index(), "email", e.currentTarget.value)
+                    }
                   />
                 </TextField>
               </div>
@@ -85,7 +123,9 @@ export function AddMemberModal() {
           <Button onClick={addField} type="submit">
             Add more
           </Button>
-          <Button type="submit">Save changes</Button>
+          <Button type="submit" onClick={saveChanges}>
+            Save changes
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

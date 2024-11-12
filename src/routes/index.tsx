@@ -2,16 +2,17 @@ import { TextField, TextFieldInput } from "~/components/ui/text-field";
 import { Button } from "~/components/ui/button";
 import { createSignal, For, Show } from "solid-js";
 import { useNavigate } from "@solidjs/router";
-import { store, addRoom } from "~/lib/persist";
+import { store, addRoom, deleteRoom } from "~/lib/persist";
 import { nanoid } from "nanoid";
 import { Separator } from "~/components/ui/separator";
+import X from "lucide-solid/icons/x";
 
 export default function Home() {
   const [room, setRoom] = createSignal("");
-  const roomId = nanoid(6);
   const nav = useNavigate();
 
   const saveRoom = () => {
+    const roomId = nanoid(6);
     addRoom({
       id: roomId,
       name: room(),
@@ -46,15 +47,24 @@ export default function Home() {
           <h1 class="text-2xl tracking-tight text-left pb-6">Recent</h1>
           <For each={store} fallback={<div>Loading...</div>}>
             {(item) => (
-              <div >
-                <div class="flex gap-56">
-                  <div>
-                    <a href={`/room/${item.id}`} class="text-lg">{item.name}</a>
+              <div>
+                <div class="flex justify-between w-96 hover:bg-neutral-100 p-3 rounded-md">
+                  <div class="space-y-3">
+                    <a href={`/room/${item.id}`} class="text-lg">
+                      {item.name}
+                    </a>
                     <p class="text-sm text-neutral-400">
                       {item.members.length} members
                     </p>
                   </div>
-                  <p class="text-sm text-neutral-400">{new Date(item.created).toLocaleDateString()}</p>
+                  <div class="flex flex-col items-center">
+                    <Button variant="ghost" onClick={() => deleteRoom(item.id)}>
+                      <X class="h-4 text-red-500" />
+                    </Button>
+                    <p class="text-sm text-neutral-400">
+                      {new Date(item.created).toLocaleDateString()}
+                    </p>
+                  </div>
                 </div>
 
                 <Separator class="h-[0.5px]" />
