@@ -71,7 +71,9 @@ export function AddMemberModal() {
   return (
     <Dialog>
       <DialogTrigger>
-        <Plus class="h-4 w-4" />
+        <Button variant={"outline"} class="gap-4">
+          Add members <Plus class="h-4 w-4" />
+        </Button>
       </DialogTrigger>
       <DialogContent class="sm:max-w-[425px]">
         <DialogHeader>
