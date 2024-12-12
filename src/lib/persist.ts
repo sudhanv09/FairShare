@@ -18,3 +18,15 @@ export const deleteRoom = (roomId: string) => {
 export const getRoomById = (roomId: string): Room | undefined => {
     return store.find((room) => room.id === roomId);
 };
+
+export const addEntryToRoom = (roomId: string, newEntry: Entry) => {
+    setStore(store.map(room => {
+      if(room.id === roomId) {
+          return {
+              ...room,
+              transactions: [...room.transactions, newEntry]
+          }
+      }
+      return room;
+    }))
+}
