@@ -10,7 +10,7 @@ import {
   SidebarGroupLabel,
   SidebarGroupContent,
 } from "~/components/ui/sidebar";
-import { AddMemberModal } from "~/components/AddMemberModal";
+import { AddMemberModal } from "./AddMemberModal";
 import { store } from "~/lib/persist";
 
 export function AppSidebar(props: ComponentProps<typeof Sidebar>) {
