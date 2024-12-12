@@ -11,14 +11,10 @@ export const addRoom = (room: Room) => {
     setStore([...store, room]);
 };
 
-export const updateRoom = (roomId: string, updatedRoom: Partial<Room>) => {
-    setStore(
-        store.map((room) =>
-            room.id === roomId ? { ...room, ...updatedRoom } : room
-        )
-    );
-};
-
 export const deleteRoom = (roomId: string) => {
     setStore(store.filter((room) => room.id !== roomId));
+};
+
+export const getRoomById = (roomId: string): Room | undefined => {
+    return store.find((room) => room.id === roomId);
 };

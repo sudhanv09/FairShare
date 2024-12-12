@@ -56,6 +56,7 @@ export function AddMemberModal() {
       balance: 0,
     }));
 
+    
     const updated = [...store];
     const roomIndex = updated.findIndex((room) => room.id === roomId);
 
@@ -71,8 +72,8 @@ export function AddMemberModal() {
   return (
     <Dialog>
       <DialogTrigger>
-        <Button variant={"outline"} class="gap-4">
-          Add members <Plus class="h-4 w-4" />
+        <Button variant={"ghost"} class="gap-4">
+          <Plus class="h-4 w-4" />
         </Button>
       </DialogTrigger>
       <DialogContent class="sm:max-w-[425px]">
