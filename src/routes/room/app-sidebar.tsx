@@ -1,12 +1,12 @@
-import { ComponentProps, For, ParentProps } from "solid-js";
+import { ComponentProps, For } from "solid-js";
 import { A } from "@solidjs/router";
+import { Button } from "~/components/ui/button";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
   SidebarHeader,
-  SidebarProvider,
   SidebarGroupLabel,
   SidebarGroupContent,
 } from "~/components/ui/sidebar";
@@ -26,7 +26,7 @@ export function AppSidebar(props: ComponentProps<typeof Sidebar>) {
             <For each={store}>
               {(item) => (
                 <div class="p-3">
-                  <A href={item.id}>{item.name}</A>
+                  <Button as={A} href={item.id} variant={"link"}>{item.name}</Button>
                 </div>
               )}
             </For>
