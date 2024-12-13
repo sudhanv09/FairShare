@@ -1,4 +1,4 @@
-import { AppSidebar } from "./app-sidebar";
+import { AppSidebar } from "./components/app-sidebar";
 import {
   SidebarInset,
   SidebarProvider,
@@ -6,8 +6,8 @@ import {
 } from "~/components/ui/sidebar";
 import { useParams } from "@solidjs/router";
 import { getRoomById } from "~/lib/persist";
-import { EntryList } from "./entry-list";
-import { Summary } from "./summary";
+import { EntryList } from "./components/entry-list";
+import { Summary } from "./components/summary";
 
 export default function RoomId() {
   const roomId = useParams().id;
